@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CheckCircle, MenuIcon } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,125 +18,154 @@ export default function Home() {
       description: "Perfect for getting started",
       price: "$0",
       features: [
-        "Boost engagement with target responses",
-        "Automate comment replies to enhance audience interaction",
-        "Turn followers into customers with targeted messaging",
+        "Create unlimited projects",
+        "Basic AI file search",
+        "Collaborate with team members",
+        "Up to 5 AI queries/month",
       ],
       cta: "Get Started",
     },
     {
-      name: "Smart AI Plan",
-      description: "Advanced features for power users",
+      name: "Pro Plan",
+      description: "Advanced AI-powered project management",
       price: "$99",
       features: [
-        "All features from Free Plan",
-        "AI-powered response generation",
-        "Advanced analytics and insights",
-        "Priority customer support",
-        "Custom branding options",
+        "All Free Plan features",
+        "Advanced AI search across projects",
+        "Priority support",
+        "Unlimited AI queries",
+        "Custom domain integration",
       ],
       cta: "Upgrade Now",
     },
   ];
+
   return (
-    <main>
-      <section className="to-bg relative bg-gradient-to-b from-slate-900 via-black">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
-        <div className="relative">
-          <div className="container px-4 py-8">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white font-bold">
-                  li
-                </div>
-                <span className="text-primary-foreground text-xl font-semibold">
-                  Automation.ai
-                </span>
+    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
+      <section className="relative overflow-hidden">
+        <div className="container relative mx-auto px-4 py-8">
+          <nav className="mb-16 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 p-2">
+                <span className="text-xl font-bold text-white">GH</span>
               </div>
-              <nav className="hidden space-x-6 text-sm text-blue-200 md:block">
-                <Link href="#features">Features</Link>
-                <Link href="#pricing">Pricing</Link>
-                <Link href="#about">About</Link>
-              </nav>
-              <Button className="bg-blue-600 text-white hover:bg-blue-700">
-                <Link href="/dashboard">Login</Link>
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-xl font-semibold text-transparent">
+                GitHub SaaS
+              </span>
+            </div>
+            <div className="flex items-center gap-6">
+              <Link href="/features" className="text-white hover:text-gray-400">
+                Features
+              </Link>
+              <Link href="/pricing" className="text-white hover:text-gray-400">
+                Pricing
+              </Link>
+              <Button asChild variant="ghost" className="rounded-full">
+                <Link
+                  href="/dashboard"
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90"
+                >
+                  Dashboard
+                </Link>
+              </Button>
+            </div>
+          </nav>
+
+          <div className="mx-auto max-w-6xl text-center">
+            <h1 className="bg-gradient-to-r from-blue-400 to-purple-300 bg-clip-text text-5xl font-bold leading-tight tracking-tighter text-transparent md:text-6xl lg:text-7xl">
+              Manage Your GitHub Projects with AI
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-400 md:text-xl">
+              Create repositories, ask AI to search files, and collaborate
+              seamlessly.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
+              <Button
+                size="lg"
+                className="rounded-full bg-gradient-to-r from-blue-500 to-purple-600 px-8 py-6 text-lg transition-all hover:from-blue-600 hover:to-purple-700"
+              >
+                Start Free Trial
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="rounded-full border-gray-600 px-8 py-6 text-lg text-gray-300 hover:bg-gray-800/50 hover:text-white"
+              >
+                Watch Demo
               </Button>
             </div>
 
-            <div className="mx-auto mt-16 max-w-3xl text-center">
-              <h1 className="text-4xl font-bold leading-tight tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl">
-                Auto Github
-              </h1>
-
-              <p className="mt-6 text-lg text-blue-200">
-                Effortlessly Automate Instagram Interactions and Unlock Business
-                Potential with Slide
-              </p>
-
-              <div className="mt-8 flex justify-center gap-4">
-                <Button
-                  size="lg"
-                  className="bg-blue-600 text-white hover:bg-blue-700"
-                >
-                  Get Started
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-blue-400 hover:bg-blue-900/50"
-                >
-                  Learn More
-                </Button>
-              </div>
-            </div>
-            <div className="relative mt-10 h-40 w-full md:h-80">
+            <div className="relative mx-auto mt-16 aspect-video w-full max-w-6xl overflow-hidden rounded-3xl border border-gray-700/50 bg-gray-800/50 backdrop-blur-xl">
               <Image
                 src="/Ig-creators.png"
-                alt="Community member"
+                alt="Dashboard preview"
                 fill
-                className="object-cover"
+                className="object-cover object-top"
+                priority
               />
             </div>
           </div>
         </div>
       </section>
-      <section className="to-bg relative w-full bg-gradient-to-b from-slate-900 via-black py-12 md:py-24 lg:py-32">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter text-white sm:text-5xl">
-              Choose Your Plan
+
+      <section className="relative bg-gradient-to-b from-gray-900/30 to-black/50 py-24">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto mb-16 max-w-2xl text-center">
+            <h2 className="mb-4 text-4xl font-bold text-white">
+              Simple, Transparent Pricing
             </h2>
-            <p className="text-muted-foreground max-w-[900px]">
-              Select the perfect plan to boost your Instagram Automation AI
+            <p className="text-lg text-gray-400">
+              Start for free and upgrade when you're ready
             </p>
           </div>
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+
+          <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2 md:gap-12">
             {plans.map((plan, index) => (
-              <Card key={index} className="flex flex-col justify-between">
-                <CardHeader>
-                  <CardTitle>{plan.name}</CardTitle>
-                  <CardDescription>{plan.description}</CardDescription>
+              <Card
+                key={index}
+                className={`group relative overflow-hidden border-gray-800/50 bg-gray-900/30 backdrop-blur-lg transition-all hover:border-blue-500/30 ${
+                  index === 1 ? "border-2 border-blue-500/30" : ""
+                }`}
+              >
+                <CardHeader className="relative">
+                  <CardTitle className="text-2xl font-bold text-white">
+                    {plan.name}
+                  </CardTitle>
+                  <CardDescription className="text-gray-400">
+                    {plan.description}
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="grid gap-4">
-                  <div className="text-4xl font-bold">
-                    {plan.price}
-                    <span className="text-muted-foreground text-lg font-normal">
-                      /month
+                <CardContent className="relative space-y-6">
+                  <div className="flex items-end gap-2">
+                    <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-5xl font-bold text-transparent">
+                      {plan.price}
                     </span>
+                    <span className="text-gray-400">/month</span>
                   </div>
-                  <ul className="space-y-2">
+                  <ul className="space-y-4">
                     {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-center">
-                        <CheckCircle className="text-primary mr-2 h-4 w-4" />
-                        <span className="text-muted-foreground text-sm">
-                          {feature}
-                        </span>
+                      <li
+                        key={i}
+                        className="flex items-start gap-3 text-gray-300"
+                      >
+                        <CheckCircle className="mt-1 h-5 w-5 flex-shrink-0 text-blue-400" />
+                        <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full">{plan.cta}</Button>
+                  <Button
+                    size="lg"
+                    className={`w-full rounded-full transition-transform ${
+                      index === 1
+                        ? "bg-gradient-to-r from-blue-500 to-purple-600 hover:scale-105"
+                        : "bg-gray-800 hover:bg-gray-700"
+                    }`}
+                  >
+                    {plan.cta}
+                  </Button>
                 </CardFooter>
               </Card>
             ))}
