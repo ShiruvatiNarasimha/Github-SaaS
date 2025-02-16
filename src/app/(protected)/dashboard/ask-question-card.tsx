@@ -61,11 +61,11 @@ const AskQuestionCard = () => {
           </DialogHeader>
           <MDEditor.Markdown
             source={answer}
-            className="!h-full max-h-[49vh] max-w-[70vw] overflow-scroll"
+            className="!h-full max-h-[40vh] max-w-[70vw] overflow-scroll"
           />
-          <div className="h-4">
-            <CodeReferences filesReferences={filesReferences} />
-          </div>
+          <div className="h-4"></div>
+          <CodeReferences filesReferences={filesReferences} />
+
           <Button
             type="button"
             onClick={() => {

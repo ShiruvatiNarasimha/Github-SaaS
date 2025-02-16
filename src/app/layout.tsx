@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -21,6 +22,7 @@ export default function RootLayout({
         <ClerkProvider>
           <TRPCReactProvider>{children}</TRPCReactProvider>
         </ClerkProvider>
+        <Toaster richColors />
       </body>
     </html>
   );
