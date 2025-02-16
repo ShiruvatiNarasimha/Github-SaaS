@@ -25,6 +25,8 @@ model User {
 
     credits Int @default(150)
     userToProjects UserToProject[]
+    questionsAsked Question[]
+
 
 }
 
@@ -38,6 +40,12 @@ model Project {
   updatedAt     DateTime        @updatedAt
   deletedAt   DateTime?
   userToProjects UserToProject[]
+  sourceCodeEmbeddings  SourceCodeEmbedding[]
+  commits        Commit[]
+  savedQuestions    Question[]
+
+
+
 }
 
 model UserToProject {
@@ -50,4 +58,54 @@ model UserToProject {
   updatedAt DateTime @updatedAt
 
   @@unique([userId, projectId])
+}
+
+
+model SourceCodeEmbedding {
+  id        String @id @default(cuid())
+
+  summaryEmbedding    Unsupported("vector(768)")?
+  sourceCode        String
+  fileName      String
+  summary       String
+
+
+
+  projectId    String
+  project  Project @relation(fields: [projectId], references: [id])
+}
+
+model Question {
+  id      String     @id @default(cuid())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+
+  question   String
+  answer     String
+
+  filesReferences  Json?
+
+  projectId   String
+  project Project @relation(fields: [projectId], references: [id])
+  userId  String
+  user User  @relation(fields: [userId], references: [id])
+}
+
+
+model Commit {
+  id String  @id @default(cuid())
+  createAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projectId String
+  project Project @relation(fields: [projectId], references: [id])
+
+  commitMessage  String
+  commitHash String
+  commitAuthorName  String
+  commitAuthorAvatar  String
+  summary   String
+  commitData String
+
 }
