@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import useRefetch from "@/hooks/use-refetch";
 import { api } from "@/trpc/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -20,6 +21,7 @@ const CreatePage = () => {
   const { register, handleSubmit, reset } = useForm<FormInput>();
   const createProject = api.project.createProject.useMutation();
   const refetch = useRefetch();
+  const router = useRouter();
 
   function onSubmit(data: FormInput) {
     createProject.mutate(
@@ -33,6 +35,7 @@ const CreatePage = () => {
           toast.success("Project created successfully");
           reset();
           refetch();
+          router.push("/dashboard");
         },
         onError: () => {
           toast.error("Failed to create project");
