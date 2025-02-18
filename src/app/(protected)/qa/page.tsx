@@ -1,10 +1,18 @@
 "use client";
 
-import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import useProject from "@/hooks/use-project";
 import { api } from "@/trpc/react";
 import React from "react";
 import AskQuestionCard from "../dashboard/ask-question-card";
+import MDEditor from "@uiw/react-md-editor";
+import CodeReferences from "../dashboard/code-references";
 
 const QAPAge = () => {
   const { projectId } = useProject();
@@ -32,7 +40,17 @@ const QAPAge = () => {
                     src={question.user.imageUrl ?? ""}
                   />
                   <div className="flex flex-col text-left">
-                    <div className=""></div>
+                    <div className="flex items-center gap-2">
+                      <p className="line-clamp-1 text-lg font-medium text-gray-700">
+                        {question.question}
+                      </p>
+                      <span className="whitespace-nowrap text-xs text-gray-400">
+                        {question.createdAt.toLocaleDateString()}
+                      </span>
+                    </div>
+                    <p className="line-clamp-1 text-sm text-gray-500">
+                      {question.answer}
+                    </p>
                   </div>
                 </div>
               </SheetTrigger>
@@ -40,6 +58,17 @@ const QAPAge = () => {
           );
         })}
       </div>
+      {question && (
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>{question.question}</SheetTitle>
+            <MDEditor.Markdown source={question.answer} />
+            <CodeReferences
+              filesReferences={(question.filesReferences ?? []) as any}
+            />
+          </SheetHeader>
+        </SheetContent>
+      )}
     </Sheet>
   );
 };
