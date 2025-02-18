@@ -16,6 +16,8 @@ import React from "react";
 import { askQuestion } from "./actions";
 import { readStreamableValue } from "ai/rsc";
 import CodeReferences from "./code-references";
+import { api } from "@/trpc/react";
+import { toast } from "sonner";
 
 const AskQuestionCard = () => {
   const { project } = useProject();
@@ -23,6 +25,7 @@ const AskQuestionCard = () => {
   const [question, setQuestion] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [answer, setAnswer] = React.useState("");
+  const saveAnswer = api.project.saveAnswer.useMutation();
   const [filesReferences, setFilesReferences] = React.useState<
     { fileName: string; sourceCode: string; summary: string }[]
   >([]);
@@ -50,14 +53,40 @@ const AskQuestionCard = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-[70vw]">
           <DialogHeader>
-            <DialogTitle>
-              <Image
-                src="/undraw_github.svg"
-                alt="Github-Ai"
-                width={40}
-                height={40}
-              />
-            </DialogTitle>
+            <div className="flex items-center gap-2">
+              <DialogTitle>
+                <Image
+                  src="/undraw_github.svg"
+                  alt="Github-Ai"
+                  width={40}
+                  height={40}
+                />
+              </DialogTitle>
+              <Button
+                disabled={saveAnswer.isPending}
+                variant={"outline"}
+                onClick={() => {
+                  saveAnswer.mutate(
+                    {
+                      projectId: project!.id,
+                      question,
+                      answer,
+                      filesReferences,
+                    },
+                    {
+                      onSuccess: () => {
+                        toast.success("Answer saved");
+                      },
+                      onError: () => {
+                        toast.error("Failed to save answer");
+                      },
+                    },
+                  );
+                }}
+              >
+                Save Answers
+              </Button>
+            </div>
           </DialogHeader>
           <MDEditor.Markdown
             source={answer}
