@@ -22,6 +22,7 @@ const MeetingCard = () => {
       console.log(accptedFiles);
       const file = accptedFiles[0];
       const downloadURL = await uploadFile(file as File, setProgress);
+      window.alert(downloadURL);
       setIsUploading(false);
     },
   });
@@ -49,6 +50,18 @@ const MeetingCard = () => {
             </Button>
           </div>
         </>
+      )}
+      {isUploading && (
+        <div className="flex items-center justify-center">
+          <CircularProgressbar
+            value={progress}
+            text={`${progress} %`}
+            className="size-20"
+          />
+          <p className="text-center text-sm text-gray-500">
+            Uploading your meeting...
+          </p>
+        </div>
       )}
     </Card>
   );
