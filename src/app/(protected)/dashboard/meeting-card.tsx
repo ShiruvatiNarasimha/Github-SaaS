@@ -52,11 +52,15 @@ const MeetingCard = () => {
         </>
       )}
       {isUploading && (
-        <div className="flex items-center justify-center">
+        <div className="">
           <CircularProgressbar
             value={progress}
             text={`${progress} %`}
             className="size-20"
+            styles={buildStyles({
+              pathColor: "#2503eb",
+              textColor: "#2563eb",
+            })}
           />
           <p className="text-center text-sm text-gray-500">
             Uploading your meeting...
