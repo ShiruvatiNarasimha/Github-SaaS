@@ -9,10 +9,13 @@ import { useDropzone } from "react-dropzone";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { api } from "@/trpc/react";
 import useProject from "@/hooks/use-project";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const MeetingCard = () => {
   const [progress, setProgress] = React.useState(0);
   const { project } = useProject();
+  const router = useRouter();
   const [isUploading, setIsUploading] = React.useState(false);
   const uploadMeeting = api.project.uploadMeeting.useMutation();
   const { getRootProps, getInputProps } = useDropzone({
@@ -31,11 +34,22 @@ const MeetingCard = () => {
         file as File,
         setProgress,
       )) as string;
-      uploadMeeting.mutate({
-        projectId: project.id,
-        meetingUrl: downloadURL,
-        name: file.name,
-      });
+      uploadMeeting.mutate(
+        {
+          projectId: project.id,
+          meetingUrl: downloadURL,
+          name: file.name,
+        },
+        {
+          onSuccess: () => {
+            toast.success("Meeting uploaded successfully");
+            router.push("/meetings");
+          },
+          onError: () => {
+            toast.error("Failed to upload meeting");
+          },
+        },
+      );
       setIsUploading(false);
     },
   });
