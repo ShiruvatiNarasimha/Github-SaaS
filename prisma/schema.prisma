@@ -82,6 +82,7 @@ model Meeting {
   updatedAt DateTime @updatedAt
 
   meetingUrl String
+  name  String
 
   projectId  String
   project Project @relation(fields: [projectId], references: [id])

@@ -7,10 +7,14 @@ import { Presentation, Upload } from "lucide-react";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { api } from "@/trpc/react";
+import useProject from "@/hooks/use-project";
 
 const MeetingCard = () => {
   const [progress, setProgress] = React.useState(0);
+  const { project } = useProject();
   const [isUploading, setIsUploading] = React.useState(false);
+  const uploadMeeting = api.project.uploadMeeting.useMutation();
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "audio/*": [".mp3", ".wav", ".m4a"],
@@ -18,11 +22,20 @@ const MeetingCard = () => {
     multiple: false,
     maxSize: 50_000_000,
     onDrop: async (accptedFiles) => {
+      if (!project) return;
       setIsUploading(true);
       console.log(accptedFiles);
       const file = accptedFiles[0];
-      const downloadURL = await uploadFile(file as File, setProgress);
-      window.alert(downloadURL);
+      if (!file) return;
+      const downloadURL = (await uploadFile(
+        file as File,
+        setProgress,
+      )) as string;
+      uploadMeeting.mutate({
+        projectId: project.id,
+        meetingUrl: downloadURL,
+        name: file.name,
+      });
       setIsUploading(false);
     },
   });
