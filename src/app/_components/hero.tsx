@@ -23,7 +23,7 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
           >
             <h1 className="mb-6 text-4xl font-bold text-white md:text-6xl lg:text-7xl">
-              Manage Your GitHub Projects with
+              Supercharge Your GitHub Projects with
               <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
                 {" "}
                 AI Power
