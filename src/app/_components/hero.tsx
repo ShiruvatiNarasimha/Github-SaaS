@@ -59,7 +59,7 @@ export default function Hero() {
               className="rounded-full border-purple-500 text-black hover:bg-purple-500/20 hover:text-white"
             >
               <Sparkles className="mr-2 h-5 w-5" />
-              Watch Demo
+              Try Now
             </Button>
           </motion.div>
 
